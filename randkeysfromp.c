@@ -14,6 +14,7 @@
 
 
     Adding to redis -------------------------------------------------------------
+
     copy this to redisCommandTable variable in redis.c
         {"randkeysfromsetp",randkeysfromsetpCommand,4,"r",0,NULL,1,1,1,0,0},
 
@@ -26,7 +27,6 @@
     copy robjArrayContains function to util.c if not exists at util.c after the '#include "util.h"' line
 
     copy randkeysfromsetpCommand function to t_set.c if not exists at t_set.c after the '#include "redis.h"' line
-
 */
 
 int robjArrayContains(robj **arr, long length, robj *elem)
