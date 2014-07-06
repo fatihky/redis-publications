@@ -3,30 +3,42 @@
      Time complexity: O(N) where N is the set cardinality.
     
     Examples:
-    127.0.0.1:6377> SADD online a b c d e
-    > (integer) 5
-    127.0.0.1:6377> MSET d:a a d:b b d:c c d:d d d:e e
-    > OK
-    127.0.0.1:6377> RANDKEYSFROMSETP online 3 d:
-    1) "c"
-    2) "a"
-    3) "b"
 
+    127.0.0.1:6377> sadd myset a b c d e f g
+    (integer) 7
+    127.0.0.1:6377> mset d:a a d:b b d:c c d:d d d:e e d:f f d:g g
+    OK
+    127.0.0.1:6377> randkeysfromsetp myset 10 d:
+    1) "c"
+    2) "e"
+    3) "g"
+    4) "b"
+    5) "f"
+    6) "a"
+    7) "d"
+    127.0.0.1:6377> randkeysfromsetp myset 10 d:
+    1) "f"
+    2) "e"
+    3) "g"
+    4) "b"
+    5) "c"
+    6) "d"
+    7) "a"
 
     Adding to redis -------------------------------------------------------------
-
     copy this to redisCommandTable variable in redis.c
         {"randkeysfromsetp",randkeysfromsetpCommand,4,"r",0,NULL,1,1,1,0,0},
 
-    copy this line to util.h if not exists at util.h after the '#include "sds.h"' line
+    copy this line to "Utils" section or anywhere in redis.h
         int robjArrayContains(robj **arr, long length, robj *elem);
 
     copy this line to "Commands prototypes" section or anywhere in redis.h
-        void randkeysfrompCommand(redisClient *c);
+        void randkeysfromsetpCommand(redisClient *c);
 
-    copy robjArrayContains function to util.c if not exists at util.c after the '#include "util.h"' line
+    copy robjArrayContains function to "Utility functions" in redis.c if not exists at redis.c
 
     copy randkeysfromsetpCommand function to t_set.c if not exists at t_set.c after the '#include "redis.h"' line
+
 */
 
 int robjArrayContains(robj **arr, long length, robj *elem)
@@ -98,4 +110,6 @@ void randkeysfromsetpCommand(redisClient *c) {
         }
         freeStringObject(tmp);
     }
+
+    zfree(array);
 }
