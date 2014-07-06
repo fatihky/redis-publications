@@ -3,11 +3,11 @@
      Time complexity: O(N) where N is the set cardinality.
     
     Examples:
-    127.0.0.1:6377> sadd online a b c d e
+    127.0.0.1:6377> SADD online a b c d e
     > (integer) 5
-    127.0.0.1:6377> mset d:a a d:b b d:c c d:d d d:e e
+    127.0.0.1:6377> MSET d:a a d:b b d:c c d:d d d:e e
     > OK
-    127.0.0.1:6377> srandmembers online 3 d:
+    127.0.0.1:6377> RANDKEYSFROMSETP online 3 d:
     1) "c"
     2) "a"
     3) "b"
