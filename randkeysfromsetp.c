@@ -1,7 +1,7 @@
 /*
     RANDKEYSFROMSETP key count prefix
-     Time complexity: O(N) where N is the set cardinality.
-    
+
+
     Examples:
 
     127.0.0.1:6377> sadd myset a b c d e f g
